@@ -167,6 +167,10 @@ export default ({init, subscribe, announce}) => {
           return
         }
 
+        if (config.transformIncomingOffer) {
+          plainOffer.sdp = config.transformIncomingOffer(plainOffer.sdp)
+        }
+
         if (peer.isDead) {
           return
         }
@@ -188,6 +192,10 @@ export default ({init, subscribe, announce}) => {
         } catch (e) {
           handleJoinError(peerId, 'answer')
           return
+        }
+
+        if (config.transformIncomingAnswer) {
+          plainAnswer.sdp = config.transformIncomingAnswer(plainAnswer.sdp)
         }
 
         if (peer) {

@@ -15,6 +15,8 @@ declare module 'trystero' {
     appId: string
     password?: string
     rtcConfig?: RTCConfiguration
+    transformIncomingOffer?: (sdp: string) => string;
+    transformIncomingAnswer?: (sdp: string) => string;
   }
 
   export interface ActionSender<T> {
