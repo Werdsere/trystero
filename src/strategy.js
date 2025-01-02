@@ -25,6 +25,10 @@ export default ({init, subscribe, announce}) => {
   let offerPool
   let offerCleanupTimer
 
+  /**
+   * 
+   * @param {import('trystero').BaseRoomConfig} config
+   */
   return (config, roomId, onJoinError) => {
     const {appId} = config
 
@@ -167,8 +171,8 @@ export default ({init, subscribe, announce}) => {
           return
         }
 
-        if (config.transformIncomingOffer) {
-          plainOffer.sdp = config.transformIncomingOffer(plainOffer.sdp)
+        if (config.incomingOfferTransform) {
+          plainOffer.sdp = config.incomingOfferTransform(plainOffer.sdp)
         }
 
         if (peer.isDead) {
@@ -194,8 +198,8 @@ export default ({init, subscribe, announce}) => {
           return
         }
 
-        if (config.transformIncomingAnswer) {
-          plainAnswer.sdp = config.transformIncomingAnswer(plainAnswer.sdp)
+        if (config.incomingAnswerTransform) {
+          plainAnswer.sdp = config.incomingAnswerTransform(plainAnswer.sdp)
         }
 
         if (peer) {
